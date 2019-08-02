@@ -132,3 +132,16 @@ server.post(`${posturl}`, async(req, res) => {
 
 });
 
+//Tags crud
+server.get(tagsurl, async(req, res) => {
+    try{
+        const tagsData = await tags.get()
+        res.status(200).json(tagsData)
+    }catch(err){
+        res.status(500).json(`{error: 'that url does not exist'}`)
+    }
+});
+
+module.exports = server
+
+
