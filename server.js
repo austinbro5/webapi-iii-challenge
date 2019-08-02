@@ -13,11 +13,13 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-
 const url = '/api/users/';
 const posturl = '/api/post/';
 const tagsurl = '/api/tags/';
 
+
+ // crud operations
+  //users
 server.get(url, async(req, res) => {
     try{
 		const usersData = await users.get()
@@ -26,7 +28,6 @@ server.get(url, async(req, res) => {
 		res.status(500).json(`{ error: "The user information could not be retrieved." }`)
 	}  
 });
-
 server.get(`${url}:id`, async(req, res) => {
     const { id } = req.params;
 
@@ -103,8 +104,7 @@ server.delete(`${url}:id`, async(req, res) => {
     }
 });
 
-//Post routes
-
+// post crud operations
 server.get(`${posturl}`, async(req, res) => {
     try{
         const postData = await post.get()
@@ -132,8 +132,7 @@ server.post(`${posturl}`, async(req, res) => {
 
 });
 
-//Tags Route
-
+//Tags crud
 server.get(tagsurl, async(req, res) => {
     try{
         const tagsData = await tags.get()
@@ -144,3 +143,5 @@ server.get(tagsurl, async(req, res) => {
 });
 
 module.exports = server
+
+
