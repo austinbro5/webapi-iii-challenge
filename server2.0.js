@@ -104,3 +104,31 @@ server.delete(`${url}:id`, async(req, res) => {
     }
 });
 
+// post crud operations
+server.get(`${posturl}`, async(req, res) => {
+    try{
+        const postData = await post.get()
+        res.status(200).json(postData)
+    }catch(err){
+        res.status(500).json(`{error: 'that route does not exist'}`)
+    }
+});
+
+server.get(`${posturl}:id`, async(req, res) => {
+    const { id } = req.params;
+    try{
+        const postData = await post.get(id)
+        if(postData.lenght === 0) {
+            res.status(404).json(`{error: 'That post was not found'}`)
+        } else {
+            res.status(200).json(postData)
+        }
+    }catch(err){
+        res.status(500).json(`{error: 'post could not be retrieved'}`)
+    }
+});
+
+server.post(`${posturl}`, async(req, res) => {
+
+});
+
